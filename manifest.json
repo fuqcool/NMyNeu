@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Fuqcool",
+  "version": "0.0.1",
+  "permissions": ["tabs"],
+  "content_scripts": [
+    {
+      "matches": ["http://myneu.neu.edu/render*", "http://myneu.neu.edu/tag*"],
+      "js": ["lib/jquery/jquery.min.js", "open.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://wl11gp.neu.edu/udcprod8/twbkwbis*"],
+      "css": [
+        "lib/bootstrap/css/bootstrap.min.css"
+      ],
+      "js": [
+        "lib/jquery/jquery.min.js",
+        "lib/bootstrap/js/bootstrap.min.js",
+        "models.js",
+        "page.js",
+        "main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
