@@ -29,21 +29,39 @@
     });
   });
 
+  function getTerm() {
+    return $terms.val();
+  }
+
+  function getSubject() {
+    return $subjects.val();
+  }
+
   $search.click(function () {
     var term = $terms.val();
     var subject = $subjects.val();
 
     models.courses({
-      term: term,
-      subject: subject
+      term: getTerm(),
+      subject: getSubject()
     }, function (courses) {
       $courses.empty();
       var html = '';
       $.each(courses, function (i, course) {
-        html += '<a href="#" class="list-group-item">' + course.name + '</a>';
+        html += '<a href="#" class="course list-group-item" course="' + course.code + '">' + course.name + '</a>';
       });
 
       $courses.html(html);
+    });
+  });
+
+  $doc.on('click', 'a.course', function (evt) {
+    var $el = $(this);
+
+    models.sections({
+      term: getTerm(),
+      subject: getSubject(),
+      course: $el.attr('course')
     });
   });
 

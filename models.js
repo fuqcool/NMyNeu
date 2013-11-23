@@ -91,11 +91,29 @@
     });
   }
 
+  function sections(data, cb) {
+    var formbody = 'term_in=' + data.term + '&sel_subj=dummy&sel_subj=' + data.subject + '&SEL_CRSE=' + data.course +'&SEL_TITLE=&BEGIN_HH=0&BEGIN_MI=0&BEGIN_AP=a&SEL_DAY=dummy&SEL_PTRM=dummy&END_HH=0&END_MI=0&END_AP=a&SEL_CAMP=neumpind&SEL_SCHD=dummy&SEL_SESS=dummy&SEL_INSTR=dummy&SEL_INSTR=%25&SEL_ATTR=dummy&SEL_ATTR=%25&SEL_LEVL=dummy&SEL_LEVL=%25&SEL_INSM=dummy&sel_dunt_code=&sel_dunt_unit=&call_value_in=&rsts=dummy&crn=dummy&path=1&SUB_BTN=View+Sections';
+    $.ajax({
+      url: '/udcprod8/bwskfcls.P_GetCrse',
+      type: 'post',
+      contentType: 'application/x-www-form-urlencoded',
+      dataType: 'html',
+      beforeSend: function (xhr, options) {
+        options.data = formbody;
+      },
+      success: function (html) {
+        debugger;
+        console.log(html);
+      }
+    });
+  }
+
   window.myneu = window.myneu || {};
 
   window.myneu.models = {
     semisters: semisters,
     subjects: majors,
-    courses: courses
+    courses: courses,
+    sections: sections
   };
 }(jQuery));
