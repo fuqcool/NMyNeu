@@ -1,0 +1,52 @@
+<div id="myneu-container" ng-controller="mainCtrl">
+  <div id="left">
+    <div id="search-panel" ng-controller="searchCtrl">
+      <select ng-model="activeTerm" ng-change="onSelectTerm()"
+              ng-options="term.name for term in terms">
+        <option value="">Please select a term</option>
+      </select>
+      <select ng-model="activeSubject" ng-change="onSelectSubject()"
+              ng-options="subj.name for subj in subjects">
+        <option value="">Please select a subject</option>
+      </select>
+    </div>
+
+    <div id="course-list" ng-controller="courseCtrl">
+      <div ng-repeat="course in courses" class="course-panel">
+        <h3 class="title" ng-click="">{{ course.id }} - {{ course.name }}</h3>
+        <table class="content">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Credit</th>
+              <th>Days</th>
+              <th>Time</th>
+              <th>Reg Status</th>
+              <th>Waiting List</th>
+              <th>Instructor</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="section in course.sections">
+              <td>{{ section.sectNum }}</td>
+              <td>{{ section.name }}</td>
+              <td>{{ section.credit }}</td>
+              <td>{{ section.days }}</td>
+              <td>{{ section.time }}</td>
+              <td>{{ section.active }}/{{ section.capacity }}</td>
+              <td>{{ section.wlactive }}/{{ section.wlcapacity }}</td>
+              <td>{{ section.instructor }}</td>
+              <td>{{ section.location }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="right">
+    <div id="dashboard-panel">
+  </div>
+</div>

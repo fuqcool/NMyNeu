@@ -1,2 +1,10 @@
 {
+  "name": "test-extension",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "latest",
+    "underscore": "latest",
+    "angular": "latest",
+    "angular-resource": "latest"
+  }
 }
