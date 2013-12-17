@@ -17,7 +17,8 @@
         <table class="content">
           <thead>
             <tr>
-              <th>#</th>
+              <th>&nbsp;</th>
+              <th>Section</th>
               <th>Name</th>
               <th>Credit</th>
               <th>Days</th>
@@ -29,8 +30,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="section in course.sections">
-              <td>{{ section.sectNum }}</td>
+            <tr ng-repeat="section in course.sections" ng-if="course.sections.length">
+              <td><input type="checkbox" ng-change="onSelectSection(section)" ng-model="section.selected" /></td>
+              <td>{{ section.section }}</td>
               <td>{{ section.name }}</td>
               <td>{{ section.credit }}</td>
               <td>{{ section.days }}</td>
@@ -47,6 +49,36 @@
   </div>
 
   <div id="right">
-    <div id="dashboard-panel">
+    <div id="dashboard-panel" ng-controller="dashboardCtrl">
+      <span>Selected Courses</span>
+      <table>
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Title</th>
+            <th>Section</th>
+            <th>Credit</th>
+            <th>Operation</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="section in sections" ng-if="sections.length">
+            <td>{{ section.course }}</td>
+            <td>{{ section.name }}</td>
+            <td>{{ section.section }}</td>
+            <td>{{ section.credit }}</td>
+            <td><img ng-click="removeSection(section)" src="chrome-extension://aaejgfabhekajlcjmfhdopmndakgejpf/img/glyphicons_016_bin.png" width="15" height="15" /></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <button ng-click="applyChanges()" ng-class="{ disable: !changed }">Apply</button>
+        <button ng-click="reset()" class="gray">Reset</button>
+      </div>
+    </div>
   </div>
+
+  <div style="clear: both" />
 </div>

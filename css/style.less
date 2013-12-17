@@ -14,10 +14,12 @@ body#myneu {
 
     #left {
         width: 63%;
+        float: left;
     }
 
     #right {
-        width: 24%;
+        width: 35%;
+        float: right;
     }
 }
 
@@ -45,5 +47,35 @@ body#myneu {
 
     .content {
         padding: 5px 10px;
+    }
+}
+
+#dashboard-panel {
+    button {
+        height: 25px;
+        width: 20%;
+
+        color: white;
+        background-color: #990000;
+        border-style: none;
+
+        font-size: 1.1em;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: rgb(180, 0, 0);
+    }
+
+    button.disable {
+        background-color: #CC9999;
+    }
+
+    button.gray {
+        background-color: gray;
+    }
+
+    button.gray:hover {
+        background-color: #AAA;
     }
 }

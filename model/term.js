@@ -19,7 +19,8 @@ angular.module('myneu').factory('Term', ['$resource', function ($resource) {
           if ($el.val()) {
             result.push({
               id: $el.val(),
-              name: $el.text()
+              name: $el.text(),
+              viewonly: $el.text().search('View only') !== -1
             });
           }
         });
