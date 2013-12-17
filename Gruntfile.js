@@ -22,10 +22,6 @@ module.exports = function (grunt) {
         files: ['model/*.js'],
         tasks: ['concat:model']
       },
-      html: {
-        files: ['page.html'],
-        tasks: ['htmltojs']
-      },
       css: {
         files: ['css/*.less'],
         tasks: ['less']
@@ -36,17 +32,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
-
-  grunt.registerTask('htmltojs', 'Convert html to javascript string', function () {
-    var html = grunt.file.read('page.html');
-
-    while (html.search('\n') !== -1) {
-      html = html.replace('\n', '');
-    }
-
-    var script = "$('body').prepend('" + html + "')";
-
-    grunt.file.write('dist/page.js', script);
-  });
 
 };

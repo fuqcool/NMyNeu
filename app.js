@@ -27,12 +27,6 @@ app.controller('courseCtrl', ['$scope', 'Course', 'Section', '$rootScope', funct
     });
   });
 
-  $event('courseCtrl').on('select-section', function () {
-
-  }).on('ssdasd', function () {
-
-  });
-
   $scope.onSelectSection = function (section) {
     $rootScope.$broadcast('select-section', section);
   };
