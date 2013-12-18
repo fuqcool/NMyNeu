@@ -1,4 +1,4 @@
-var app = angular.module('myneu', ['ngResource']);
+var app = angular.module('myneu', ['ngResource', 'ngCookies']);
 
 app.controller('mainCtrl', ['$scope', function ($scope) {
 
@@ -39,17 +39,43 @@ app.controller('courseCtrl', ['$scope', 'Course', 'Section', '$rootScope', funct
 
 }]);
 
-app.controller('searchCtrl', ['$scope', 'Term', 'Subject', '$rootScope', function ($scope, Term, Subject, $rootScope) {
-  $scope.terms = Term.query();
+app.controller('searchCtrl', ['$scope', 'Term', 'Subject', '$rootScope', '$cookieStore', function ($scope, Term, Subject, $rootScope, $cookies) {
+  var init = true;
+  var favTerm = $cookies.get('favTerm');
+  var favSubject = $cookies.get('favSubject');
+
+  $scope.terms = Term.query(function () {
+    if (init && favTerm) {
+      $scope.activeTerm = _.findWhere($scope.terms, { id: favTerm });
+      $scope.activeTerm && $scope.onSelectTerm();
+    }
+  });
 
   $scope.onSelectTerm = function () {
-    $scope.subjects = Subject.query({ term: $scope.activeTerm.id });
+    $scope.subjects = Subject.query({ term: $scope.activeTerm.id }, function () {
+      if (init && favSubject) {
+        $scope.activeSubject = _.findWhere($scope.subjects, { id: favSubject });
+        $scope.activeSubject && $scope.onSelectSubject();
+
+        init = false;
+      }
+    });
     $rootScope.$broadcast('select-term', $scope.activeTerm);
   };
 
   $scope.onSelectSubject = function () {
     $rootScope.$broadcast('select-subject', $scope.activeTerm, $scope.activeSubject);
+
+    if (!init) {
+      rememberChoice();
+    }
   };
+
+  function rememberChoice() {
+    $cookies.put('favTerm', $scope.activeTerm.id);
+    $cookies.put('favSubject', $scope.activeSubject.id);
+  }
+
 }]);
 
 
@@ -89,6 +115,7 @@ app.controller('dashboardCtrl', ['$scope', 'SelectedClass', function ($scope, Se
   };
 
   $scope.applyChanges = function () {
+    $scope.originalSections = _.clone($scope.sections);
     $scope.changed = false;
   };
 

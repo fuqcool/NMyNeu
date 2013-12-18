@@ -5,6 +5,7 @@
     "jquery": "latest",
     "underscore": "latest",
     "angular": "latest",
-    "angular-resource": "latest"
+    "angular-resource": "latest",
+    "angular-cookies": "latest"
   }
 }
