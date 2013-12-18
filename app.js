@@ -66,9 +66,7 @@ app.controller('searchCtrl', ['$scope', 'Term', 'Subject', '$rootScope', '$cooki
   $scope.onSelectSubject = function () {
     $rootScope.$broadcast('select-subject', $scope.activeTerm, $scope.activeSubject);
 
-    if (!init) {
-      rememberChoice();
-    }
+    rememberChoice();
   };
 
   function rememberChoice() {
